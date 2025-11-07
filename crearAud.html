@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creador de Audiencias</title>
+  <link rel="stylesheet" href="crearAud.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Emblema_del_Poder_Judicial_de_la_Naci%C3%B3n_Argentina.svg" alt="Logo Poder Judicial">
+      <span>Poder Judicial<br><small>Provincia de Santa Fe</small></span>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar...">
+      <button>🔍</button>
+    </div>
+
+    <div class="user-buttons">
+      <a href="#">Mi cuenta</a>
+      <a href="index.html">Inicio</a>
+    </div>
+  </header>
+
+  <!-- TITULO -->
+  <section class="titulo-section">
+    <h2>Creador de Audiencias</h2>
+  </section>
+
+  <!-- FORMULARIO -->
+  <main class="form-container">
+    <form id="formCrearAudiencia">
+      <div class="form-grid">
+
+        <div class="campo">
+          <label for="distrito">Distrito Judicial</label>
+          <input type="text" id="distrito" placeholder="Ingrese distrito judicial">
+        </div>
+
+        <div class="campo">
+          <label for="instancia">Instancia</label>
+          <input type="text" id="instancia" placeholder="Ingrese instancia">
+        </div>
+
+        <div class="campo">
+          <label for="sala">Sala</label>
+          <select id="sala">
+            <option value="">Seleccione sala</option>
+            <option value="Sala 1">Sala 1</option>
+            <option value="Sala 2">Sala 2</option>
+            <option value="Sala 3">Sala 3</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="autoridad">Autoridad Judicial</label>
+          <select id="autoridad">
+            <option value="">Seleccione autoridad</option>
+            <option value="Juez Pedro López">Juez Pedro López</option>
+            <option value="Jueza Marta Gómez">Jueza Marta Gómez</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="fechaHora">Fecha y Hora de Audiencia</label>
+          <input type="datetime-local" id="fechaHora">
+        </div>
+
+        <div class="campo">
+          <label for="defensor">Nombre del Defensor</label>
+          <input type="text" id="defensor" placeholder="Ingrese nombre del defensor">
+        </div>
+      </div>
+
+      <!-- BOTONES -->
+      <div class="botones">
+        <button type="submit" class="btn-crear">Crear</button>
+        <button type="reset" class="btn-limpiar">Limpiar</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById("formCrearAudiencia").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Audiencia creada (simulación)");
+    });
+  </script>
+
+</body>
+</html>
