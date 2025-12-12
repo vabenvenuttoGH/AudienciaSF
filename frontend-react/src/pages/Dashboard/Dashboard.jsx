@@ -11,7 +11,6 @@ const Dashboard = () => {
             <h2>Gestión Judicial</h2>
             <span className="subtitle">Panel de Control</span>
         </div>
-        <Link to="/" className="logout-btn">Cerrar Sesión</Link>
       </header>
 
       <main className="content-grid">
