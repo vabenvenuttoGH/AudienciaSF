@@ -1,0 +1,24 @@
+/* Variables globales - Paleta del Poder Judicial */
+:root {
+  /* Colores PJ */
+  --pj-azul-oscuro: #0d1b2a;
+  --pj-azul-claro: #4a6a8a;
+  --pj-fondo-gris: #f7f9fc;
+  --pj-borde-gris: #e1e4e8;
+  
+  /* Colores base */
+  --color-blanco: #ffffff;
+  --color-negro: #111111;
+  --color-gris-oscuro: #333333;
+  --color-gris: #555555;
+  --color-gris-claro: #777777;
+  --color-gris-muy-claro: #eeeeee;
+  
+  /* Fuentes */
+  --font-principal: "Inter", sans-serif;
+  
+  /* Sombras */
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-subtle: 0 2px 5px rgba(0, 0, 0, 0.05);
+}

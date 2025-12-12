@@ -1,0 +1,58 @@
+/* Header institucional */
+.header-institucional {
+    background-color: var(--pj-azul-oscuro);
+    color: var(--color-blanco);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 4px solid var(--pj-azul-claro);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-placeholder {
+    font-size: 40px;
+}
+
+.texto-institucional h1 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.texto-institucional h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+/* Buscador central */
+.buscador-container {
+    display: flex;
+}
+
+.buscador-container input {
+    padding: 8px;
+    border: none;
+    width: 300px;
+}
+
+.buscador-container button {
+    background-color: var(--pj-azul-oscuro);
+    border: 1px solid var(--pj-azul-claro);
+    color: var(--color-blanco);
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.header-right {
+    font-weight: 500;
+    cursor: pointer;
+}
