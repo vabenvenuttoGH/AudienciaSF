@@ -19,6 +19,7 @@ function App() {
         <Route path="/audiencias" element={<Audiencias />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/crear-audiencia" element={<FormularioAudiencia />} />
+        <Route path="/nueva-audiencia" element={<FormularioAudiencia />} />
       </Routes>
     </Router>
   );

@@ -68,3 +68,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## API URL (development)
+
+If your backend API runs on a different host or port, set the environment variable `REACT_APP_API_URL` before starting the dev server, e.g. `REACT_APP_API_URL=http://localhost:5000 npm start`.

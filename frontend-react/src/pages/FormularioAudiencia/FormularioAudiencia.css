@@ -1,3 +1,29 @@
-.formulario-audiencia-container {
-  /* Estilos aquí */
+
+/*
+** Estilos (Si no tienes el archivo FormularioAudiencia.css, puedes usar estos estilos)
+** Estos estilos asumen que tienes clases básicas de utilidad como .dashboard-container, .back-btn, .btn-black de otros archivos CSS.
+*/
+.form-group {
+    margin-bottom: 1rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+.form-group-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 1rem;
 }
