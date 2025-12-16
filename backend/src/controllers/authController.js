@@ -10,7 +10,6 @@ exports.registerUser = async (req, res) => {
 
     // CORRECCIÓN CLAVE 2: Validar que la jurisdiccion exista
     if (!nombre || !apellido || !email || !password || !jurisdiccion) { 
-        // Se agregó la validación de jurisdiccion aquí para coincidir con el modelo
         return res.status(400).json({ success: false, message: 'Por favor, complete todos los campos.' });
     }
 
@@ -41,13 +40,15 @@ exports.registerUser = async (req, res) => {
             res.status(400).json({ success: false, message: 'Datos de usuario inválidos.' });
         }
     } catch (error) {
-        // Al ocurrir un error de validación de Mongoose, se captura aquí y se devuelve 500
         console.error(error);
-        res.status(500).json({ success: false, message: 'Error interno del servidor. (Verificar la conexión a la base de datos y la validación de Mongoose)' });
+        res.status(500).json({ success: false, message: 'Error interno del servidor. (Verificar la base de datos)' });
     }
 };
 
+
 // @route   POST /api/login 
+// @desc    Autenticar usuario y obtener datos
+// @access  Public
 exports.authUser = async (req, res) => {
     const { email, password } = req.body;
 

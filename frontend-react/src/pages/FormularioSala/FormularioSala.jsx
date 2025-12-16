@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 // Asegúrate de que salaService exista en esta ruta
 import { createSala, getSalaById, updateSala } from '../../services/salaService';
 // Reutilizamos el CSS de Audiencias para que se vea igual
-import '../FormularioAudiencia/FormularioAudiencia.css'; 
+import './FormularioSala.css'; 
 
 const FormularioSala = () => {
   const [formData, setFormData] = useState({

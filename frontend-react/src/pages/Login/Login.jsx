@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; 
 import "./Login.css";
 
+
 export default function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -56,11 +57,6 @@ export default function Login() {
     <div className="login-container">
       {/* ... (Header estático) ... */}
       <div className="header">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-          alt="Logo Justicia"
-          className="logo"
-        />
         <h1>Poder Judicial de Santa Fe</h1>
         <h3 className="subtitle">Sistema de Gestión de Audiencias</h3>
         <p className="subtext">

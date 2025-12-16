@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAllSalas, deleteSala } from '../../services/salaService';
-import '../Audiencias/Audiencias.css'; // Reutilizamos estilos
+import './Salas.css'; 
 
 const Salas = () => {
   const [salas, setSalas] = useState([]);

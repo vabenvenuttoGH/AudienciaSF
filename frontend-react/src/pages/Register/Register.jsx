@@ -11,7 +11,7 @@ export default function Register() {
         email: '',
         password: '',
         confirmPassword: '',
-        jurisdiccion: '' // <-- AÑADIDO: Nuevo campo jurisdiccion
+        jurisdiccion: '' 
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -41,7 +41,6 @@ export default function Register() {
                     apellido: formData.apellido,
                     email: formData.email,
                     password: formData.password,
-                    // <-- AÑADIDO: Envío de la jurisdicción al backend
                     jurisdiccion: formData.jurisdiccion 
                 }),
             });
@@ -97,7 +96,7 @@ export default function Register() {
                         <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="ejemplo@justiciasantafe.gov.ar" className="input" required />
                     </div>
 
-                    {/* Campo de JURISDICCIÓN (NUEVO) */}
+                    {/* Campo de JURISDICCIÓN */}
                     <div className="form-group">
                         <label>Jurisdicción</label>
                         <select 
@@ -112,7 +111,6 @@ export default function Register() {
                             <option value="rosario">Rosario</option>
                         </select>
                     </div>
-                    {/* FIN DEL CAMPO JURISDICCIÓN */}
 
                     {/* Campos de Contraseña */}
                     <div className="form-group">

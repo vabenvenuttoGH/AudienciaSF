@@ -1,6 +1,20 @@
 // src/services/salaService.js
 const API_URL = 'http://localhost:5000/api/salas';
 
+// Función auxiliar para manejar la respuesta
+const handleResponse = async (response, errorMessage) => {
+  if (!response.ok) throw new Error(errorMessage);
+  
+  // Verifica si la respuesta tiene contenido JSON
+  const contentType = response.headers.get("content-type");
+  if (contentType && contentType.includes("application/json")) {
+    return response.json();
+  }
+  // Si no hay JSON (ej. éxito sin contenido), devuelve un objeto vacío para evitar errores
+  return {};
+};
+
+
 export const getAllSalas = async () => {
   const response = await fetch(API_URL);
   const result = await response.json();
@@ -19,8 +33,8 @@ export const createSala = async (data) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error('Error al crear sala');
-  return response.json();
+  // Usamos la función auxiliar
+  return handleResponse(response, 'Error al crear sala');
 };
 
 export const updateSala = async (id, data) => {
@@ -29,12 +43,12 @@ export const updateSala = async (id, data) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error('Error al actualizar sala');
-  return response.json();
+  // Usamos la función auxiliar
+  return handleResponse(response, 'Error al actualizar sala');
 };
 
 export const deleteSala = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-  if (!response.ok) throw new Error('Error al eliminar sala');
-  return response.json();
+  // Usamos la función auxiliar
+  return handleResponse(response, 'Error al eliminar sala');
 };

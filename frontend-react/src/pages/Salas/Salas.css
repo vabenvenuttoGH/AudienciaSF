@@ -1,0 +1,56 @@
+/* Reutilizando las clases principales de Dashboard */
+/* Contenedor principal y layout */
+.dashboard-container {
+    font-family: var(--font-principal);
+    background-color: var(--pj-fondo-gris);
+    min-height: 100vh;
+    padding: 2rem;
+    color: var(--color-negro);
+}
+
+/* Tarjeta contenedora de la tabla */
+.dashboard-card {
+    background: var(--color-blanco);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Estilo para texto secundario */
+.subtext {
+    font-size: 0.85rem;
+    color: var(--color-gris-claro);
+    margin-bottom: 1rem;
+}
+
+/* Botones y Enlaces */
+.back-btn {
+    color: var(--color-gris);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: var(--color-negro);
+}
+
+.btn-black {
+    background-color: var(--color-negro);
+    color: var(--color-blanco);
+    border: none;
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-black:hover {
+    background-color: var(--color-gris-oscuro);
+}

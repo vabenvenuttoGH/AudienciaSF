@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import './Header.css'; 
 // Ajusta la ruta del logo si es necesario (aquí se asume que se llama logo.png)
-import LogoPoderJudicial from './logo.png'; 
+import LogoPoderJudicial from './LogoWhitePJ.png'; 
 
 const Header = () => {
   return (

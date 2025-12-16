@@ -32,7 +32,7 @@
 .register-card {
   background: var(--color-blanco);
   width: 100%;
-  max-width: 450px; /* Un poco más ancho para los campos extra */
+  max-width: 450px; 
   padding: 2rem;
   border-radius: 12px;
   box-shadow: var(--shadow-medium);
@@ -81,7 +81,7 @@ label {
 
 .btn {
   width: 100%;
-  background-color: var(--pj-azul-oscuro); /* Cambié a azul oscuro para el botón principal */
+  background-color: var(--pj-azul-oscuro); 
   color: var(--color-blanco);
   border: none;
   border-radius: 8px;
