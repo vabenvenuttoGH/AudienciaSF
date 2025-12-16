@@ -1,8 +1,7 @@
-// frontend-react/src/pages/Login/Login.jsx (CÓDIGO COMPLETO FUNCIONAL)
+// frontend-react/src/pages/Login/Login.jsx
 import React, { useState } from "react"; 
 import { Link, useNavigate } from "react-router-dom"; 
 import "./Login.css";
-
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -38,7 +37,10 @@ export default function Login() {
 
         if (response.ok) {
             // LOGIN EXITOSO: Redirigir al Dashboard (ruta '/')
-            alert('Inicio de sesión exitoso. Redirigiendo al Dashboard.'); 
+            // Guardar token si existiera (opcional por ahora)
+            // localStorage.setItem('token', data.token); 
+            
+            // alert('Inicio de sesión exitoso. Redirigiendo al Dashboard.'); 
             navigate('/'); 
         } else {
             // Error de credenciales, etc.
@@ -52,10 +54,8 @@ export default function Login() {
     }
   };
 
-
   return (
     <div className="login-container">
-      {/* ... (Header estático) ... */}
       <div className="header">
         <h1>Poder Judicial de Santa Fe</h1>
         <h3 className="subtitle">Sistema de Gestión de Audiencias</h3>
@@ -65,7 +65,16 @@ export default function Login() {
       </div>
 
       <div className="login-card">
-        <button className="back-btn">← Volver</button>
+        {/* --- BOTÓN CORREGIDO AQUÍ --- */}
+        <button 
+            className="back-btn" 
+            type="button" 
+            onClick={() => navigate('/')}
+        >
+            ← Volver
+        </button>
+        {/* --------------------------- */}
+
         <h2>Acceso Seguro</h2>
         <p className="instruction">
           Ingrese sus credenciales institucionales
@@ -77,7 +86,7 @@ export default function Login() {
         </div>
         
         {/* Mostrar mensaje de error */}
-        {error && <div className="alert error-alert">{error}</div>} 
+        {error && <div className="alert error-alert" style={{color: 'red', borderColor: 'red'}}>{error}</div>} 
 
         {/* Formulario que usa el handler handleSubmit */}
         <form onSubmit={handleSubmit}> 
@@ -86,7 +95,7 @@ export default function Login() {
             <label>Usuario (Correo Electrónico)</label>
             <input
               type="email"
-              name="email" // <-- Nombre para el formData
+              name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="Ingrese su correo institucional"
@@ -99,7 +108,7 @@ export default function Login() {
             <label>Contraseña</label>
             <input
               type="password"
-              name="password" // <-- Nombre para el formData
+              name="password"
               value={formData.password}
               onChange={handleChange}
               placeholder="Ingrese su contraseña"
