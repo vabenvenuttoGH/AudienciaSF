@@ -28,7 +28,7 @@ const Dashboard = () => {
           </div>
         </div>
         
-        {/* Tarjeta Salas */}
+        {/* Tarjeta Salas - ACTUALIZADA */}
         <div className="dashboard-card">
            <div className="card-header">
             <h3>🚪 Salas</h3>
@@ -36,7 +36,10 @@ const Dashboard = () => {
           </div>
           <div className="card-body">
             <p className="instruction">Gestión de ocupación de salas.</p>
-            <button className="btn-disabled">Próximamente</button>
+            {/* Cambiamos el botón deshabilitado por un Link funcional */}
+            <Link to="/salas" style={{textDecoration: 'none'}}>
+                <button className="btn-black">Gestionar Salas</button>
+            </Link>
           </div>
         </div>
       </main>

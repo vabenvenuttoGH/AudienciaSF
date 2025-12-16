@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getAllAudiencias } from '../../services/audienciaService'; // <-- Nuevo: Importar el servicio
+import { Link, useNavigate } from 'react-router-dom'; // Importamos useNavigate
+// Importamos deleteAudiencia
+import { getAllAudiencias, deleteAudiencia } from '../../services/audienciaService'; 
 import './Audiencias.css';
 
-// Función auxiliar para formatear la fecha que viene del backend (ISO Date) a DD/MM/YYYY
+// ... (MANTÉN TU FUNCIÓN formatFecha AQUÍ) ...
 const formatFecha = (isoDate) => {
     if (!isoDate) return '';
     const date = new Date(isoDate);
-    // Verificar si la fecha es válida. Usamos getUTCDate para evitar problemas de zona horaria con la fecha.
     if (isNaN(date)) return isoDate; 
     const day = date.getUTCDate().toString().padStart(2, '0');
     const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
@@ -19,36 +19,51 @@ const Audiencias = () => {
   const [audiencias, setAudiencias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  const navigate = useNavigate(); // Hook para navegar
 
-  // Usamos useEffect para cargar los datos cuando el componente se monta
+  const fetchAudiencias = async () => {
+    setLoading(true);
+    try {
+      const data = await getAllAudiencias();
+      setAudiencias(data); 
+      setError(null);
+    } catch (err) {
+      console.error("Error:", err);
+      setError("Error al cargar las audiencias.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchAudiencias = async () => {
-      setLoading(true);
-      try {
-        // Usamos la función centralizada del servicio
-        const data = await getAllAudiencias();
-        setAudiencias(data); 
-        setError(null);
-      } catch (err) {
-        console.error("Error al obtener audiencias:", err);
-        // Mensaje de error más general ya que la lógica HTTP está en el service
-        setError("Error al cargar las audiencias. Revisa la consola y la conexión del servidor.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchAudiencias();
   }, []); 
 
+  // --- LÓGICA PARA ELIMINAR ---
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de que deseas eliminar esta audiencia?")) {
+      try {
+        await deleteAudiencia(id);
+        // Actualizamos la lista visualmente quitando el elemento borrado
+        setAudiencias(prev => prev.filter(a => a._id !== id));
+      } catch (err) {
+        alert("Hubo un error al intentar eliminar.");
+      }
+    }
+  };
+
+  // --- LÓGICA PARA EDITAR ---
+  const handleEdit = (id) => {
+    navigate(`/editar-audiencia/${id}`);
+  };
+
   return (
     <div className="dashboard-container">
-      {/* Header con botón Volver */}
+      {/* ... (TU HEADER Y BOTONES DE VOLVER SIGUEN IGUAL) ... */}
       <div style={{maxWidth: '1000px', margin: '0 auto'}}>
         <div style={{marginBottom: '2rem'}}>
-            <Link to="/dashboard" className="back-btn" style={{textDecoration:'none', display:'flex', alignItems:'center', gap:'5px'}}>
-               ← Volver al Panel
-            </Link>
+            <Link to="/dashboard" className="back-btn" style={{textDecoration:'none', display:'flex', alignItems:'center', gap:'5px'}}>← Volver al Panel</Link>
         </div>
 
         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'1.5rem'}}>
@@ -56,22 +71,13 @@ const Audiencias = () => {
                 <h2 style={{margin:0}}>Agenda de Audiencias</h2>
                 <p className="subtext">Listado completo de expedientes</p>
             </div>
-            {/* Aquí deberías usar <Link to="/nueva-audiencia"> si tienes la ruta configurada */}
-            <Link to="/nueva-audiencia" className="btn-black" style={{width:'auto', padding:'10px 20px', textDecoration: 'none'}}>
-                +  Nueva Audiencia
-            </Link>
+            <Link to="/nueva-audiencia" className="btn-black" style={{width:'auto', padding:'10px 20px', textDecoration: 'none'}}>+ Nueva Audiencia</Link>
         </div>
 
-        {/* Mensajes de Carga y Error */}
-        {loading && <p style={{textAlign: 'center'}}>Cargando audiencias...</p>}
-        {error && <p style={{textAlign: 'center', color: 'red', padding: '20px', border: '1px solid red', borderRadius: '5px'}}>{error}</p>}
+        {loading && <p style={{textAlign: 'center'}}>Cargando...</p>}
+        {error && <p style={{color: 'red', textAlign:'center'}}>{error}</p>}
         
-        {/* Tabla estilo "Card" - Solo se muestra si hay datos y no hay error */}
-        {!loading && audiencias.length === 0 && !error && (
-            <p style={{textAlign: 'center', color: '#777', padding: '20px'}}>No hay audiencias programadas en la base de datos.</p>
-        )}
-
-        {audiencias.length > 0 && (
+        {!loading && !error && audiencias.length > 0 && (
             <div className="dashboard-card" style={{padding: '0', overflow: 'hidden'}}>
                 <table style={{width:'100%', borderCollapse:'collapse', textAlign:'left'}}>
                     <thead style={{backgroundColor:'#f9fafb', borderBottom:'1px solid #eaeaea'}}>
@@ -96,8 +102,19 @@ const Audiencias = () => {
                                     <span style={getEstadoBadge(aud.estado)}>{aud.estado}</span>
                                 </td>
                                 <td style={tdStyle}>
-                                    <button style={{border:'none', background:'none', cursor:'pointer', marginRight:'10px'}}>✏️</button>
-                                    <button style={{border:'none', background:'none', cursor:'pointer'}}>🗑️</button>
+                                    {/* BOTONES CON FUNCIONES CONECTADAS */}
+                                    <button 
+                                        onClick={() => handleEdit(aud._id)}
+                                        style={{border:'none', background:'none', cursor:'pointer', marginRight:'10px', fontSize:'1.2rem'}} 
+                                        title="Editar">
+                                        ✏️
+                                    </button>
+                                    <button 
+                                        onClick={() => handleDelete(aud._id)}
+                                        style={{border:'none', background:'none', cursor:'pointer', fontSize:'1.2rem'}} 
+                                        title="Eliminar">
+                                        🗑️
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -110,14 +127,13 @@ const Audiencias = () => {
   );
 };
 
-// Estilos rápidos para la tabla
+// ... (TUS ESTILOS Y HELPERS SIGUEN IGUAL) ...
 const thStyle = { padding: '15px 20px', fontSize: '0.85rem', color: '#555', fontWeight: '600' };
 const tdStyle = { padding: '15px 20px', fontSize: '0.9rem', color: '#333' };
-
 const getEstadoBadge = (estado) => {
     const base = { padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '500' };
-    if (estado === 'Programada') return { ...base, backgroundColor: '#e3f2fd', color: '#0d47a1' }; // Azul suave
-    if (estado === 'Realizada') return { ...base, backgroundColor: '#e8f5e9', color: '#1b5e20' };  // Verde suave
+    if (estado === 'Programada') return { ...base, backgroundColor: '#e3f2fd', color: '#0d47a1' };
+    if (estado === 'Realizada') return { ...base, backgroundColor: '#e8f5e9', color: '#1b5e20' };
     return base;
 };
 

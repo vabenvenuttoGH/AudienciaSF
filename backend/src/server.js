@@ -4,6 +4,8 @@ const cors = require('cors');
 const connectDB = require('./config/database');
 const audienciaRoutes = require('./routes/audienciaRoutes');
 const authRoutes = require('./routes/authRoutes');
+const salaRoutes = require('./routes/salaRoutes'); // <--- 1. IMPORTAR RUTAS DE SALAS
+
 const app = express();
 
 // Conectar a MongoDB
@@ -20,8 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use('/api/audiencias', audienciaRoutes);
-// Usar las rutas de autenticación
 app.use('/api', authRoutes);
+app.use('/api/salas', salaRoutes); // <--- 2. AGREGAR EL ENDPOINT DE SALAS
 
 // Ruta de prueba
 app.get('/', (req, res) => {
