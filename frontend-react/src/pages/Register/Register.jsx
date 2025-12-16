@@ -1,7 +1,8 @@
 // frontend-react/src/pages/Register/Register.jsx
+
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import "./Register.css"; // Importar CSS específico
+import { Link, useNavigate } from 'react-router-dom'; 
+import "./Register.css";
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -9,18 +10,17 @@ export default function Register() {
         apellido: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        jurisdiccion: '' // <-- AÑADIDO: Nuevo campo jurisdiccion
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    
-    // Función para manejar el cambio en los inputs
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Función para manejar el envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -33,33 +33,30 @@ export default function Register() {
         }
 
         try {
-            // Asume que tu backend está corriendo en el puerto 5000 (por defecto en server.js)
             const response = await fetch('http://localhost:5000/api/register', { 
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     nombre: formData.nombre,
                     apellido: formData.apellido,
                     email: formData.email,
                     password: formData.password,
+                    // <-- AÑADIDO: Envío de la jurisdicción al backend
+                    jurisdiccion: formData.jurisdiccion 
                 }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                // Registro exitoso
                 alert('¡Registro exitoso! Por favor, inicia sesión.');
-                navigate('/login'); // Redirige al Login
+                navigate('/login'); 
             } else {
-                // Manejo de errores (ej: email duplicado)
-                setError(data.message || 'Error en el registro. Verifique sus datos.');
+                setError(data.message || 'Error en el registro. Inténtalo de nuevo.');
             }
         } catch (err) {
             console.error('Error de conexión:', err);
-            setError('No se pudo conectar con el servidor. Asegúrese de que el backend esté corriendo.');
+            setError('No se pudo conectar con el servidor.');
         } finally {
             setLoading(false);
         }
@@ -68,7 +65,6 @@ export default function Register() {
     return (
         <div className="register-container">
             <div className="header">
-                {/* Puedes usar el mismo logo o uno nuevo */}
                 <img
                     src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
                     alt="Logo Justicia"
@@ -79,83 +75,62 @@ export default function Register() {
             </div>
 
             <div className="register-card">
-                <h2>Crear una Cuenta</h2>
-                <p className="instruction">
-                    Acceso para personal público y autorizado
-                </p>
-
-                {/* Mensaje de Error */}
+                <h2>Crear Cuenta</h2>
+                <p className="instruction">Acceso para personal público y autorizado</p>
+                
                 {error && <div className="alert error-alert">{error}</div>}
 
                 <form onSubmit={handleSubmit}>
+                    {/* Campos de Nombre y Apellido */}
                     <div className="form-group">
                         <label>Nombre</label>
-                        <input
-                            type="text"
-                            name="nombre"
-                            value={formData.nombre}
-                            onChange={handleChange}
-                            placeholder="Su nombre"
-                            className="input"
-                            required
-                        />
+                        <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} placeholder="Su nombre" className="input" required />
                     </div>
                     <div className="form-group">
                         <label>Apellido</label>
-                        <input
-                            type="text"
-                            name="apellido"
-                            value={formData.apellido}
-                            onChange={handleChange}
-                            placeholder="Su apellido"
-                            className="input"
-                            required
-                        />
+                        <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} placeholder="Su apellido" className="input" required />
                     </div>
+                    
+                    {/* Campo de Correo Electrónico */}
                     <div className="form-group">
                         <label>Correo Electrónico</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="ejemplo@justiciasantafe.gov.ar" className="input" required />
+                    </div>
+
+                    {/* Campo de JURISDICCIÓN (NUEVO) */}
+                    <div className="form-group">
+                        <label>Jurisdicción</label>
+                        <select 
+                            name="jurisdiccion"
+                            value={formData.jurisdiccion}
                             onChange={handleChange}
-                            placeholder="ejemplo@justiciasantafe.gov.ar"
                             className="input"
                             required
-                        />
+                        >
+                            <option value="">Seleccionar jurisdicción</option>
+                            <option value="santafe">Santa Fe</option>
+                            <option value="rosario">Rosario</option>
+                        </select>
                     </div>
+                    {/* FIN DEL CAMPO JURISDICCIÓN */}
+
+                    {/* Campos de Contraseña */}
                     <div className="form-group">
                         <label>Contraseña</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder="Mínimo 8 caracteres"
-                            className="input"
-                            required
-                        />
+                        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Mínimo 8 caracteres" className="input" required />
                     </div>
                     <div className="form-group">
                         <label>Confirmar Contraseña</label>
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            value={formData.confirmPassword}
-                            onChange={handleChange}
-                            placeholder="Repita la contraseña"
-                            className="input"
-                            required
-                        />
+                        <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Repita la contraseña" className="input" required />
                     </div>
-
+                    
                     <button type="submit" className="btn" disabled={loading}>
                         {loading ? 'Registrando...' : 'Registrar Cuenta'}
                     </button>
                 </form>
 
-                <p className="register-link-text">
-                    ¿Ya tienes una cuenta? <Link to="/login" className="login-link">Iniciar Sesión</Link>
+                <p className="login-link-text">
+                    ¿Ya tienes cuenta? <Link to="/login" className="register-link">Iniciar Sesión</Link>
                 </p>
             </div>
         </div>

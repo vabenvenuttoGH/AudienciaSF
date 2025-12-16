@@ -24,6 +24,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    jurisdiccion: { // <-- AÑADIR ESTE CAMPO
+        type: String,
+        required: true, // Debe ser requerido si lo es en el frontend
+        trim: true,
+        enum: ['santafe', 'rosario'], // Ejemplo, basado en el Login.jsx
+    },
     rol: { // Puedes usarlo para diferenciar entre personal y público
         type: String,
         enum: ['admin', 'personal', 'publico'],
