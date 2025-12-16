@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/database');
 const audienciaRoutes = require('./routes/audienciaRoutes');
-
+const authRoutes = require('./routes/authRoutes');
 const app = express();
 
 // Conectar a MongoDB
@@ -20,6 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use('/api/audiencias', audienciaRoutes);
+// Usar las rutas de autenticación
+app.use('/api', authRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {

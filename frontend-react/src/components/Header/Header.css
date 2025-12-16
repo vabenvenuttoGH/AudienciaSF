@@ -2,7 +2,7 @@
 .header-institucional {
     background-color: var(--pj-azul-oscuro);
     color: var(--color-blanco);
-    height: 70px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,12 +13,35 @@
 .header-left {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 1px;
 }
 
-.logo-placeholder {
-    font-size: 40px;
+/* -------------------------------------- */
+/* ESTILOS DEL LOGO */
+/* -------------------------------------- */
+
+/* El contenedor del logo (Reemplaza el antiguo .logo-placeholder) */
+.logo-container {
+    height: 75px; 
+    display: flex;
+    align-items: center;
 }
+
+/* El tag <img> que contiene la imagen */
+.logo-imagen {
+    height: 100%; /* La altura es 50px */
+    width: auto; /* Mantiene la proporción */
+    max-width: 150px; 
+}
+
+/* -------------------------------------- */
+
+/* Si todavía tenías esta clase por algún error, elimínala, ya no se usa en el JSX */
+/*
+.logo-placeholder {
+    font-size: 20px;
+}
+*/
 
 .texto-institucional h1 {
     margin: 0;

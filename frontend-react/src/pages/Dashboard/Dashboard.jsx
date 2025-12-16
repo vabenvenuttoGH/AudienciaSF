@@ -27,19 +27,7 @@ const Dashboard = () => {
              </Link>
           </div>
         </div>
-
-        {/* Tarjeta Autoridades */}
-        <div className="dashboard-card">
-          <div className="card-header">
-            <h3>⚖️ Autoridades</h3>
-            <p className="subtext">Jueces y secretarios</p>
-          </div>
-          <div className="card-body">
-            <p className="instruction">Administración de personal judicial.</p>
-            <button className="btn-disabled">Próximamente</button>
-          </div>
-        </div>
-
+        
         {/* Tarjeta Salas */}
         <div className="dashboard-card">
            <div className="card-header">

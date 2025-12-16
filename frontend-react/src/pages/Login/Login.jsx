@@ -1,4 +1,6 @@
+// frontend-react/src/pages/Login/Login.jsx
 import React from "react";
+import { Link } from "react-router-dom"; 
 import "./Login.css";
 
 export default function Login() {
@@ -30,12 +32,16 @@ export default function Login() {
         </div>
 
         <form>
+          {/* ... (campos de formulario) ... */}
+
+          {/* --- CAMPO USUARIO/EMAIL --- */}
           <div className="form-group">
-            <label>Usuario Institucional</label>
+            <label>Usuario </label>
             <input
-              type="text"
-              placeholder="Ingrese su usuario"
+              type="email"
+              placeholder="Ingrese su correo institucional"
               className="input"
+              required
             />
           </div>
 
@@ -60,6 +66,16 @@ export default function Login() {
           <button type="submit" className="btn">
             Iniciar sesión
           </button>
+          
+          {/* --- AÑADIR EL ENLACE DE REGISTRO AQUÍ --- */}
+          <div className="register-link-container">
+              <p>¿Aún no tienes cuenta institucional?
+                  <Link to="/register" className="register-link">
+                      Regístrate aquí
+                  </Link>
+              </p>
+          </div>
+          {/* ----------------------------------------- */}
         </form>
       </div>
     </div>

@@ -58,7 +58,7 @@ const Audiencias = () => {
             </div>
             {/* Aquí deberías usar <Link to="/nueva-audiencia"> si tienes la ruta configurada */}
             <Link to="/nueva-audiencia" className="btn-black" style={{width:'auto', padding:'10px 20px', textDecoration: 'none'}}>
-                + Nueva Audiencia
+                +  Nueva Audiencia
             </Link>
         </div>
 

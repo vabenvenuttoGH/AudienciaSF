@@ -115,3 +115,39 @@ label {
 .btn:hover {
   background-color: #222;
 }
+
+.register-link-container {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666; /* Color de texto base */
+}
+
+.register-link-container p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.register-link {
+    /* Utiliza un color que contraste y sea clickable, como el azul oscuro del PJ */
+    color: var(--pj-azul-oscuro); 
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.2s ease;
+}
+
+.register-link:hover {
+    color: var(--pj-azul-claro); /* Usa el color más claro al pasar el mouse */
+    text-decoration: underline;
+}
+
+/* Puedes añadir este estilo al botón para darle más espacio si es necesario */
+.btn {
+    margin-top: 20px; /* Aumenta el margen superior para separarlo de los inputs */
+}
+
+/* Asegurar que el alert no se rompa */
+.alert {
+    margin-bottom: 15px;
+}
